@@ -1,0 +1,26 @@
+
+
+goto foder code:
+
+open cmd
+
+npm init
+
+open vs code to open folder
+
+
+ npm install --save solc@0.4.17
+
+ npm install --save mocha ganache-cli  web3@1.0.0-beta.26 
+
+
+cd F:\Blockchain_Project\Inbox
+
+node compile.js
+
+node run test 
+
+npm install @truffle/hdwallet-provider
+
+
+ npm install solc@0.8.9

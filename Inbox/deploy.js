@@ -1,11 +1,25 @@
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+const Web3 = require('web3');
 
-const path = require('path');
-const fs  = require('fs');
-const solc = require('solc');
+const { abi, evm } = require('./compile');
 
+provider = new HDWalletProvider(
+    'garden calm caution custom gauge surge echo atom adapt speak antenna coyote',
+    'https://rinkeby.infura.io/v3/53ba013833ad43f0929aaea2c6a93f21'
+);
 
-const inboxPath = path.resolve(__dirname, 'contracts', 'Inbox.sol');
+const web3 = new Web3(provider);
 
-const source =  fs.readFileSync(inboxPath,'utf-8');
+const deploy = async () => {
+  const accounts = await web3.eth.getAccounts();
 
-module.exports = solc.compile(source,1).contracts[':Inbox'];
+  console.log('Attempting to deploy from account', accounts[0]);
+
+  const result = await new web3.eth.Contract(abi)
+    .deploy({ data: evm.bytecode.object, arguments: ['Hi there!'] })
+    .send({ gas: '1000000', from: accounts[0] });
+
+  console.log('Contract deployed to', result.options.address);
+  provider.engine.stop();
+};
+deploy();
