@@ -18,7 +18,7 @@ cd F:\Blockchain_Project\Inbox
 
 node compile.js
 
-node run test 
+npm run test 
 
 npm install @truffle/hdwallet-provider
 
